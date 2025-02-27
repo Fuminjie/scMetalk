@@ -162,19 +162,3 @@ plot_scMetalk_circos <- function(
   }
   add_legends()
 }
-
-# 使用示例
-plot_communication_network(
-  comm_data = comm_data,  # 替换实际数据
-  top_n = 15,
-  cell_colors = c("#1abc9c", "#3498db"),
-  metabolite_palette = "Set1",
-  arrow_params = list(
-    type = "triangle",
-    length = 0.2,
-    width_factor = 0.2,
-    col = "grey40"
-  ),
-  legend_position = c(-0.25, 0.9),
-  legend_cex = 0.8
-)
