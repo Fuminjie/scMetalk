@@ -1,7 +1,8 @@
 Package: scMetalk
 Title: Single-Cell Metabolic Communication Analysis
 Version: 0.1.0
-Authors@R: person("Minjie Fu", "16307110106@fudan.edu.cn", role = c("aut", "cre"))
+Author: Minjie Fu
+Maintainer: Minjie Fu <16307110106@fudan.edu.cn>
 Description: A package for analyzing metabolic communication in single-cell data.
 License: MIT
 Encoding: UTF-8
