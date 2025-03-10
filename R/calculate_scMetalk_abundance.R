@@ -1,7 +1,8 @@
 #' 根据代谢酶基因表达计算代谢物丰度
 #' 
-#' @param seurat_obj Seurat对象（需包含cell_type列）
-#' @param enzyme_file 代谢酶文件路径（包含Metabolite和Gene列）
+#' @param seurat_obj Seurat对象
+#' @param species 种属类别（"human"或"mouse"）
+#' @param group.by 细胞分类
 #' @param method 基因整合方法（"mean"或"sum"）
 #' @return 代谢物丰度矩阵（行：代谢物，列：细胞类型）
 #' @export

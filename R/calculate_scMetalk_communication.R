@@ -1,14 +1,11 @@
 #' 计算细胞间代谢通讯强度矩阵（按Transporter和Receptor对分别计算）
 #'
 #' @param seurat_obj Seurat对象（需包含cell_type列）
-#' @param metabolite_abundance 代谢物丰度矩阵（行：代谢物，列：细胞类型）
-#' @param transporter_file 转运体文件路径（包含Metabolite和Gene列）
-#' @param receptor_file 受体文件路径（包含Metabolite和Gene列）
+#' @param species 种属类别（"human"或"mouse"）
 #' @param method 基因整合方法（"mean"或"sum"）
 #' @return 包含输出细胞、输入细胞、代谢物、转运体、受体和通讯强度的数据框
 #' @export
-calculate_scMetalk_communication <- function(seurat_obj, 
-                                             method = "mean", species = "human") {
+calculate_scMetalk_communication <- function(seurat_obj,method = "mean", species = "human") {
   
   transporter_df  <- load_metabolic_data("transporter", species)
   receptor_df <- load_metabolic_data("receptor", species)
