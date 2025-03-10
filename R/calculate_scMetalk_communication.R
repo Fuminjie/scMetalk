@@ -8,17 +8,11 @@
 #' @return 包含输出细胞、输入细胞、代谢物、转运体、受体和通讯强度的数据框
 #' @export
 calculate_scMetalk_communication <- function(seurat_obj, 
-                                              transporter_file, 
-                                              receptor_file, 
-                                              method = "mean") {
-  # 检查输入格式
-  if (!"cell_type" %in% colnames(seurat_obj@meta.data)) {
-    stop("Seurat对象必须包含'cell_type'列。")
-  }
+                                             method = "mean", species = "human") {
   
-  # 读取转运体和受体关系表
-  transporter_df <- read.csv(transporter_file)
-  receptor_df <- read.csv(receptor_file)
+  transporter_df  <- load_metabolic_data("transporter", species)
+  receptor_df <- load_metabolic_data("receptor", species)
+  metabolite_abundance <- seurat_obj@misc$metabolite_abundance
   
   if (!all(c("Metabolite", "Gene") %in% colnames(transporter_df)) ||
       !all(c("Metabolite", "Gene") %in% colnames(receptor_df))) {
@@ -40,10 +34,7 @@ calculate_scMetalk_communication <- function(seurat_obj,
     strength = numeric(),
     stringsAsFactors = FALSE
   )
-  
-  # 获取代谢物丰度矩阵 
-  metabolite_abundance = seurat_obj@misc$metabolite_abundance
-  
+
   # 遍历每个代谢物
   metabolites <- rownames(metabolite_abundance)
   for (metabolite in metabolites) {

@@ -5,6 +5,7 @@
 #' @param top_n 展示的Top N通讯流
 #' @export
 plot_scMetalk_alluvial <- function(comm_result, seurat_obj, top_n = 10) {
+  require(dplyr)
   # 检查输入
   if (!"strength" %in% colnames(comm_result)) {
     stop("comm_result必须包含'strength'列。")

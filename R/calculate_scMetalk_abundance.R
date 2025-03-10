@@ -5,27 +5,21 @@
 #' @param method 基因整合方法（"mean"或"sum"）
 #' @return 代谢物丰度矩阵（行：代谢物，列：细胞类型）
 #' @export
-calculate_scMetalk_abundance <- function(seurat_obj, 
-                                           enzyme_file, 
-                                           method = "mean") {
-  # 检查输入格式
-  if (!"cell_type" %in% colnames(seurat_obj@meta.data)) {
-    stop("Seurat对象必须包含'cell_type'列。")
-  }
-  
+calculate_scMetalk_abundance <- function(seurat_obj, group.by = "cell_type",
+                                           species = "mouse",method = "mean") {
+
   # 读取代谢酶关系表
-  enzyme_df <- read.csv(enzyme_file)
+  enzyme_df <- load_metabolic_data("enzyme", species)
   if (!all(c("Metabolite", "Gene") %in% colnames(enzyme_df))) {
     stop("代谢酶文件必须包含'Metabolite'和'Gene'列。")
   }
   
   # 获取细胞类型平均表达矩阵
-  avg_expr <- Seurat::AverageExpression(seurat_obj, 
-                                        group.by = "cell_type", 
-                                        assays = "RNA")$RNA
+  avg_expr <- data.frame(Seurat::AverageExpression(seurat_obj, 
+                                        group.by = group.by)$RNA)
   
   # 初始化代谢物丰度矩阵
-  cell_types <- unique(seurat_obj$cell_type)
+  cell_types <- colnames(avg_expr)
   metabolites <- unique(enzyme_df$Metabolite)
   metabolite_abundance <- matrix(
     0, 
@@ -46,7 +40,7 @@ calculate_scMetalk_abundance <- function(seurat_obj,
     }
     
     # 计算基因表达得分
-    scores <- avg_expr[valid_genes, , drop = FALSE]
+    scores <- avg_expr[valid_genes, ]
     if (method == "mean") {
       score <- colMeans(scores)
     } else if (method == "sum") {
