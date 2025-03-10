@@ -6,21 +6,20 @@
 \usage{
 calculate_scMetalk_communication(
   seurat_obj,
-  transporter_file,
-  receptor_file,
-  method = "mean"
+  method = "mean",
+  species = "human"
 )
 }
 \arguments{
 \item{seurat_obj}{Seurat对象（需包含cell_type列）}
 
-\item{transporter_file}{转运体文件路径（包含Metabolite和Gene列）}
-
-\item{receptor_file}{受体文件路径（包含Metabolite和Gene列）}
-
 \item{method}{基因整合方法（"mean"或"sum"）}
 
 \item{metabolite_abundance}{代谢物丰度矩阵（行：代谢物，列：细胞类型）}
+
+\item{transporter_file}{转运体文件路径（包含Metabolite和Gene列）}
+
+\item{receptor_file}{受体文件路径（包含Metabolite和Gene列）}
 }
 \value{
 包含输出细胞、输入细胞、代谢物、转运体、受体和通讯强度的数据框

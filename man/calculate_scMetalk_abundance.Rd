@@ -4,14 +4,19 @@
 \alias{calculate_scMetalk_abundance}
 \title{根据代谢酶基因表达计算代谢物丰度}
 \usage{
-calculate_scMetalk_abundance(seurat_obj, enzyme_file, method = "mean")
+calculate_scMetalk_abundance(
+  seurat_obj,
+  group.by = "cell_type",
+  species = "mouse",
+  method = "mean"
+)
 }
 \arguments{
 \item{seurat_obj}{Seurat对象（需包含cell_type列）}
 
-\item{enzyme_file}{代谢酶文件路径（包含Metabolite和Gene列）}
-
 \item{method}{基因整合方法（"mean"或"sum"）}
+
+\item{enzyme_file}{代谢酶文件路径（包含Metabolite和Gene列）}
 }
 \value{
 代谢物丰度矩阵（行：代谢物，列：细胞类型）

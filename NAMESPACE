@@ -2,6 +2,7 @@
 
 export(calculate_scMetalk_abundance)
 export(calculate_scMetalk_communication)
+export(load_metabolic_data)
 export(plot_scMetalk_alluvial)
 export(plot_scMetalk_circos)
 export(plot_scMetalk_heatmap)
